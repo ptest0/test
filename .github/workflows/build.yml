@@ -43,7 +43,7 @@ jobs:
       run: sudo apt-get update
 
     - name: Install packages
-      run: sudo apt-get install --fix-missing libgl1-mesa-dev
+      run: sudo apt-get install --fix-missing libgl1-mesa-dev tar
 
     - name: Set preset name
       id: preset

@@ -1,4 +1,4 @@
-name: Build
+name: Build  
 
 on:
   push:
@@ -12,20 +12,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows]
+        os: [windows, ubuntu]
         conf: [release, debug]
-        arch: [x64, x86]
+        arch: [x64]
         exclude:
           - os: ubuntu
             arch: x86
           - os: macos
             arch: x86
-
+    
     runs-on: ${{ matrix.os }}-latest
 
     steps:
     - uses: actions/checkout@v3
-
+    
     - uses: ammaraskar/msvc-problem-matcher@master
     - uses: ammaraskar/gcc-problem-matcher@master
 

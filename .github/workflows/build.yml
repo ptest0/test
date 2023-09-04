@@ -53,13 +53,13 @@ jobs:
       if: runner.os == 'windows'
       working-directory: ${{github.workspace}}/lib/qtbase
       run: |
-        ./configure.bat 
+        ./configure.bat -developer-build -opensource -nomake examples -nomake tests -confirm-license -opengl desktop
         cmake --build .
 
     - name: Install QT
       working-directory: ${{github.workspace}}/lib/qtbase
       run: |
-        ./configure
+        ./configure -developer-build -opensource -nomake examples -nomake tests -confirm-license -opengl desktop
         cmake --build .
 
 

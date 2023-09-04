@@ -42,9 +42,9 @@ jobs:
     
     - name: Install QT
       if: runner.os == 'windows'
+      working-directory: lib/qtbase
       run: |
-        cd ${PWD}\lib\qtbase
-        .\configure.bat 
+        configure.bat 
         cmake --build .
         cmake --install .
       shell: pwsh

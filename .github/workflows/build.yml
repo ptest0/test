@@ -39,6 +39,15 @@ jobs:
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: ${{ matrix.arch }}
+    
+    - if: runner.os == 'windows'
+      - name: Install QT
+        run: |
+          cd ${PWD}\lib\qtbase
+          .\configure.bat 
+          cmake --build .
+          cmake --install .
+        shell: pwsh
 
     - name: Configure CMake
       run: cmake --preset ${{ steps.preset.outputs.name }}

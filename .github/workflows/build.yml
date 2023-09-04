@@ -26,8 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - uses: seanmiddleditch/gha-setup-ninja@master
-    - uses: ammaraskar/msvc-problem-matcher@master
+    - uses: ashutoshvarma/setup-ninja@master
     - uses: ammaraskar/gcc-problem-matcher@master
 
     - name: Set preset name

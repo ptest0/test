@@ -45,6 +45,11 @@ jobs:
       working-directory: ./lib/qtbase
       run: ./configure.bat 
 
+    - name: Install QT
+      if: runner.os == 'ubuntu'
+      working-directory: ./lib/qtbase
+      run: ./configure 
+
     - name: Configure CMake
       run: cmake --preset ${{ steps.preset.outputs.name }}
 

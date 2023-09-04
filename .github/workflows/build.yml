@@ -44,7 +44,6 @@ jobs:
       if: runner.os == 'windows'
       working-directory: lib/qtbase
       run: configure.bat 
-      run: cmake --build . 
 
     - name: Configure CMake
       run: cmake --preset ${{ steps.preset.outputs.name }}

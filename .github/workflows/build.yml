@@ -1,0 +1,50 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows]
+        conf: [release, debug]
+        arch: [x64, x86]
+        exclude:
+          - os: ubuntu
+            arch: x86
+          - os: macos
+            arch: x86
+
+    runs-on: ${{ matrix.os }}-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: ammaraskar/msvc-problem-matcher@master
+    - uses: ammaraskar/gcc-problem-matcher@master
+
+    - name: Set preset name
+      id: preset
+      shell: bash
+      run: |
+        echo "name=${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.conf }}" | sed s/ubuntu/linux/ >> $GITHUB_OUTPUT
+
+    - name: Set up Windows compiler
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: ${{ matrix.arch }}
+
+    - name: Configure CMake
+      run: cmake --preset ${{ steps.preset.outputs.name }}
+
+    - name: Build
+      run: cmake --build --preset ${{ steps.preset.outputs.name }}
+
+    - name: Test
+      run: ctest --timeout 5 --preset ${{ steps.preset.outputs.name }}

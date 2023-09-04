@@ -30,7 +30,12 @@ jobs:
     
     - uses: ashutoshvarma/setup-ninja@master
     - uses: ammaraskar/gcc-problem-matcher@master
-    - uses: openrndr/setup-opengl@v1.1
+
+    - name: Update packages
+      run: sudo apt-get update
+
+    - name: Install packages
+      run: sudo apt-get install --fix-missing libgl1-mesa-dev
 
     - name: Set preset name
       id: preset
@@ -49,11 +54,13 @@ jobs:
       working-directory: ${{github.workspace}}/lib/qtbase
       run: |
         ./configure.bat 
+        cmake --build .
 
     - name: Install QT
       working-directory: ${{github.workspace}}/lib/qtbase
       run: |
         ./configure
+        cmake --build .
 
 
     - name: Configure CMake

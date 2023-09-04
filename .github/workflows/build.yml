@@ -43,7 +43,6 @@ jobs:
     - name: Install QT
       if: runner.os == 'windows'
       working-directory: lib/qtbase
-      run: echo "[LS]: $(ls -al)"
       run: configure.bat 
       run: cmake --build . 
 

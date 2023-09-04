@@ -40,14 +40,14 @@ jobs:
       with:
         platform: ${{ matrix.arch }}
     
-    - if: runner.os == 'windows'
-      - name: Install QT
-        run: |
-          cd ${PWD}\lib\qtbase
-          .\configure.bat 
-          cmake --build .
-          cmake --install .
-        shell: pwsh
+    - name: Install QT
+      if: runner.os == 'windows'
+      run: |
+        cd ${PWD}\lib\qtbase
+        .\configure.bat 
+        cmake --build .
+        cmake --install .
+      shell: pwsh
 
     - name: Configure CMake
       run: cmake --preset ${{ steps.preset.outputs.name }}

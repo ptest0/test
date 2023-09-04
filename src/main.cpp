@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
     spdlog::info("Witam w spdlogu!");
     // std::cout << boost::addressof(app) << std::endl;
     QMainWindow mainWindow;
-    mainWindow.setWindowTitle("Moje Okno");
+    mainWindow.setWindowTitle("Moje Okno - test");
     mainWindow.show();
 
     return app.exec();

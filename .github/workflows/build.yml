@@ -46,6 +46,7 @@ jobs:
     - name: Install QT
       if: runner.os == 'windows'
       working-directory: ${{github.workspace}}/lib/qtbase
+      uses: ashutoshvarma/setup-ninja@master
       run: |
         ./configure.bat 
         cmake --build .

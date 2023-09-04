@@ -12,10 +12,15 @@ add_subdirectory(${INSTALL_LIB_DIR}/googletest)
 add_subdirectory(${INSTALL_LIB_DIR}/spdlog)
 
 
+set(QT_VERSION 6)
+set(CMAKE_PREFIX_PATH "${INSTALL_LIB_DIR}/qtbase/lib/cmake")
+set(Qt6_DIR ${INSTALL_LIB_DIR}/qtbase/lib/cmake/Qt6)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+
 # main target
 add_executable(main)
 target_sources(main PRIVATE src/main.cpp)
-target_link_libraries(main PRIVATE spdlog::spdlog spdlog::spdlog_header_only)
+target_link_libraries(main PRIVATE spdlog::spdlog spdlog::spdlog_header_only Qt6::Core Qt6::Gui Qt6::Widgets)
 
 # tests target
 add_executable(tests)

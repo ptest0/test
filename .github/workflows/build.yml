@@ -45,15 +45,16 @@ jobs:
     
     - name: Install QT
       if: runner.os == 'windows'
-      working-directory: ./lib/qtbase
-      run: ./configure.bat 
+      working-directory: ${{github.workspace}}/lib/qtbase
+      run: |
+        ./configure.bat 
+        cmake --build .
 
     - name: Install QT
       working-directory: ${{github.workspace}}/lib/qtbase
       run: |
-        ls
-        echo "test"
-        ls ${{github.workspace}}
+        ./configure
+        cmake --build .
 
 
     - name: Configure CMake

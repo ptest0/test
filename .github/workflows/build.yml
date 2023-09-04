@@ -47,9 +47,10 @@ jobs:
       run: ./configure.bat 
 
     - name: Install QT
-      working-directory: ./lib/qtbase
+      working-directory: ${{github.workspace}}/lib/qtbase
       run: |
-        ls
+        ls | echo
+        echo "test"
 
 
     - name: Configure CMake

@@ -25,6 +25,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: recursive 
     
     - uses: ashutoshvarma/setup-ninja@master
     - uses: ammaraskar/gcc-problem-matcher@master
@@ -49,8 +51,9 @@ jobs:
     - name: Install QT
       working-directory: ${{github.workspace}}/lib/qtbase
       run: |
-        ls | echo
+        ls
         echo "test"
+        ls ${{github.workspace}}
 
 
     - name: Configure CMake

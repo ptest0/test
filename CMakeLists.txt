@@ -1,6 +1,5 @@
 # CMakeLists.txt
 cmake_minimum_required(VERSION 3.5)
-project(DeskPoE)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})

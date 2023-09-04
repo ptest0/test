@@ -36,9 +36,9 @@ jobs:
         echo "name=${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.conf }}" | sed s/ubuntu/linux/ >> $GITHUB_OUTPUT
 
     - name: Set up Windows compiler
-      uses: ilammy/msvc-dev-cmd@v1
+      uses: egor-tensin/setup-mingw@v2
       with:
-        arch: ${{ matrix.arch }}
+        platform: ${{ matrix.arch }}
 
     - name: Configure CMake
       run: cmake --preset ${{ steps.preset.outputs.name }}

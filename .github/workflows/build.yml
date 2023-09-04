@@ -43,11 +43,9 @@ jobs:
     - name: Install QT
       if: runner.os == 'windows'
       working-directory: lib/qtbase
-      run: |
-        configure.bat 
-        cmake --build .
-        cmake --install .
-      shell: pwsh
+      run: echo "[LS]: $(ls -al)"
+      run: configure.bat 
+      run: cmake --build . 
 
     - name: Configure CMake
       run: cmake --preset ${{ steps.preset.outputs.name }}

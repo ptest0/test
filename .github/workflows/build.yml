@@ -1,5 +1,4 @@
 name: Build Linux 
-
 on:
   push:
     branches: [ "main" ]

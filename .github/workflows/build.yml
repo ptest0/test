@@ -88,6 +88,13 @@ jobs:
         key: ${{ matrix.os }}-${{matrix.arch}}
     
     - uses: ammaraskar/gcc-problem-matcher@master
+    - uses: seanmiddleditch/gha-setup-ninja@master
+    - name: Set up Windows compiler
+      uses: egor-tensin/setup-mingw@v2
+      with:
+        platform: ${{ matrix.arch }}
+
+    - uses: openrndr/setup-opengl@v1.1
 
     - name: Set preset name
       id: preset

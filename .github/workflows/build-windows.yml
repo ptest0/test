@@ -8,11 +8,11 @@ on:
 
 jobs:
   build:
-    name: Build-Linux
+    name: Build-Windows
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu]
+        os: [windows]
         conf: [debug]
         arch: [x64]
     
@@ -31,14 +31,7 @@ jobs:
         path: lib
         key: .gitmodules
     
-    - uses: ashutoshvarma/setup-ninja@master
     - uses: ammaraskar/gcc-problem-matcher@master
-
-    - name: Update packages
-      run: sudo apt-get update
-
-    - name: Install packages
-      run: sudo apt-get install --fix-missing libgl1-mesa-dev tar
 
     - name: Set preset name
       id: preset
@@ -50,7 +43,7 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       working-directory: ${{github.workspace}}/lib/qtbase
       run: |
-        ./configure -developer-build -opensource -nomake examples -nomake tests -confirm-license -opengl desktop
+        ./configure.bat -developer-build -opensource -nomake examples -nomake tests -confirm-license -opengl desktop
         cmake --build .
 
 

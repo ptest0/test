@@ -1,4 +1,4 @@
-name: Build Linux 
+name: Build 
 on:
   push:
     branches: [ "main" ]
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build-Linux
+    name: Build
     strategy:
       fail-fast: false
       matrix:

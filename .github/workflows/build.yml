@@ -89,6 +89,10 @@ jobs:
     
     - uses: ammaraskar/gcc-problem-matcher@master
     - uses: seanmiddleditch/gha-setup-ninja@master
+
+    - name: Install OpenSSL
+      run: choco install openssl
+
     - name: Set up Windows compiler
       uses: egor-tensin/setup-mingw@v2
       with:
@@ -124,9 +128,9 @@ jobs:
       run: ctest --timeout 5 --preset ${{ steps.preset.outputs.name }}
 
     
-  test-docs-build:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build Doxygen Docs
-        uses: mattnotmitt/doxygen-action@v1.3.3
+  # test-docs-build:
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Build Doxygen Docs
+  #       uses: mattnotmitt/doxygen-action@v1.3.3

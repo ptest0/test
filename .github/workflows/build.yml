@@ -94,7 +94,11 @@ jobs:
       with:
         platform: ${{ matrix.arch }}
 
-    - uses: openrndr/setup-opengl@v1.1
+    - name: Install Windows OpenGL
+      run: |
+        git clone --depth 1 https://github.com/pyvista/gl-ci-helpers.git
+        powershell gl-ci-helpers/appveyor/install_opengl.ps1
+        if (Test-Path -Path "C:\Windows\system32\opengl32.dll" -PathType Leaf) {Exit 0} else {Exit 1}
 
     - name: Set preset name
       id: preset

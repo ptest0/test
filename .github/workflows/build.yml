@@ -110,7 +110,7 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       working-directory: ${{github.workspace}}/lib/qtbase
       run: |
-        ./configure.bat -nomake examples -nomake tests -confirm-license 
+        ./configure.bat -nomake examples -nomake tests 
         cmake --build .
 
 
@@ -122,3 +122,11 @@ jobs:
 
     - name: Test
       run: ctest --timeout 5 --preset ${{ steps.preset.outputs.name }}
+
+    
+  test-docs-build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Doxygen Docs
+        uses: mattnotmitt/doxygen-action@v1.3.3

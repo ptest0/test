@@ -25,11 +25,11 @@ jobs:
         submodules: recursive 
 
     - name: Cache Modules
-      id: cache-linux
+      id: cache
       uses: actions/cache@v2
       with:
         path: lib
-        key: .gitmodules
+        key: ${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.conf }}
     
     - uses: ashutoshvarma/setup-ninja@master
     - uses: ammaraskar/gcc-problem-matcher@master
@@ -47,10 +47,59 @@ jobs:
         echo "name=${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.conf }}" | sed s/ubuntu/linux/ >> $GITHUB_OUTPUT
 
     - name: Install QT
-      if: steps.cache-linux.outputs.cache-hit != 'true'
+      if: steps.cache.outputs.cache-hit != 'true'
       working-directory: ${{github.workspace}}/lib/qtbase
       run: |
         ./configure -developer-build -opensource -nomake examples -nomake tests -confirm-license -opengl desktop
+        cmake --build .
+
+
+    - name: Configure CMake
+      run: cmake --preset ${{ steps.preset.outputs.name }}
+
+    - name: Build
+      run: cmake --build --preset ${{ steps.preset.outputs.name }}
+
+    - name: Test
+      run: ctest --timeout 5 --preset ${{ steps.preset.outputs.name }}
+
+  build-windows:
+    name: Build Windows
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows]
+        conf: [debug]
+        arch: [x64]
+    
+    runs-on: ${{ matrix.os }}-latest
+
+    steps:
+
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive 
+
+    - name: Cache Modules
+      id: cache
+      uses: actions/cache@v2
+      with:
+        path: lib
+        key: ${{ matrix.os }}-${{matrix.arch}}
+    
+    - uses: ammaraskar/gcc-problem-matcher@master
+
+    - name: Set preset name
+      id: preset
+      shell: bash
+      run: |
+        echo "name=${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.conf }}" | sed s/ubuntu/linux/ >> $GITHUB_OUTPUT
+
+    - name: Install QT
+      if: steps.cache.outputs.cache-hit != 'true'
+      working-directory: ${{github.workspace}}/lib/qtbase
+      run: |
+        ./configure.bat -developer-build -opensource -nomake examples -nomake tests -confirm-license -opengl desktop
         cmake --build .
 
 

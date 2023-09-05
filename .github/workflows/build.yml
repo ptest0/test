@@ -110,7 +110,7 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       working-directory: ${{github.workspace}}/lib/qtbase
       run: |
-        ./configure.bat -developer-build -opensource -nomake examples -nomake tests -confirm-license -opengl desktop
+        ./configure.bat -developer-build -opensource -nomake examples -nomake tests -confirm-license 
         cmake --build .
 
 

@@ -7,3 +7,12 @@
 [submodule "lib/qtbase"]
 	path = lib/qtbase
 	url = https://github.com/qt/qtbase.git
+[submodule "lib/qtnetworkauth"]
+	path = lib/qtnetworkauth
+	url = https://github.com/qt/qtnetworkauth.git
+[submodule "lib/qtdeclarative"]
+	path = lib/qtdeclarative
+	url = https://github.com/qt/qtdeclarative.git
+[submodule "lib/qtshadertools"]
+	path = lib/qtshadertools
+	url = https://github.com/qt/qtshadertools.git
